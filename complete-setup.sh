@@ -26,8 +26,8 @@ echo "}" >> /etc/nftables.conf
 sudo systemctl enable nftables.service
 #}}}
 
-#DNS
-sudo apt install dnsmasq
+#DNS {{{
+sudo apt-get -y install dnsmasq
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original
 
 echo "domain-needed" >> /etc/dnsmasq.conf
@@ -39,7 +39,13 @@ echo "local=/casa.net/" >> /etc/dnsmasq.conf
 echo "listen-address=127.0.0.1,192.168.15.201" >> /etc/dnsmasq.conf
 echo "" >> /etc/dnsmasq.conf
 echo "server=192.168.15.1" >> /etc/dnsmasq.conf
+#}}}
 
-#Docker
+#Docker {{{
+sudo apt-get -y install curl
+curl -fsSL get.docker.com | sudo sh
+#}}}
 
-#Nextcloud container
+#Nextcloud container {{{
+sudo docker run --sig-proxy=false --name nextcloud-aio-mastercontainer --restart always --publish 80:80 --publish 8080:8080 --publish 8443:8443 --volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config --volume /var/run/docker.sock:/var/run/docker.sock:ro nextcloud/all-in-one:latest
+#}}}
