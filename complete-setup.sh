@@ -42,8 +42,13 @@ echo "server=192.168.15.1" >> /etc/dnsmasq.conf
 #}}}
 
 #Docker {{{
-sudo apt-get -y install curl
-curl -fsSL get.docker.com | sudo sh
+#https://docs.docker.com/engine/install/debian/
+sudo apt-get -y ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo apt-get update
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo docker run hello-world
 #}}}
 
 #Nextcloud container {{{
