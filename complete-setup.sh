@@ -24,6 +24,7 @@ echo "	}" >> /etc/nftables.conf
 echo "}" >> /etc/nftables.conf
 
 sudo systemctl enable nftables.service
+sudo systemctl start nftables.service
 #}}}
 
 #DNS {{{
@@ -39,6 +40,7 @@ echo "local=/casa.net/" >> /etc/dnsmasq.conf
 echo "listen-address=127.0.0.1,192.168.15.201" >> /etc/dnsmasq.conf
 echo "" >> /etc/dnsmasq.conf
 echo "server=192.168.15.1" >> /etc/dnsmasq.conf
+sudo systemctl restart dnsmasq.service
 #}}}
 
 #Docker {{{
